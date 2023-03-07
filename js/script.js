@@ -26,10 +26,15 @@ e quali dei numeri da indovinare sono stati individuati.
 */
 
 
-const randomContainerEl = document.getElementById("random-container")
 const playButtonEl = document.getElementById("play")
+const sendButtonEl = document.getElementById("send-numbers")
+const randomContainerEl = document.getElementById("random-container")
 const timerContainerEl = document.getElementById("timer")
+const inputContainerEl = document.getElementById("input-container")
+const resultEl = document.getElementById("result")
+const inputArray = []
 let randomNumbers ;
+let inputEl;
 let timer;
 let secondsLeft = 10
 
@@ -41,11 +46,41 @@ playButtonEl.addEventListener("click", function(){
 
 
     timer = setInterval(countDown, 1000)
+
+
+    
     
 })
     
 
+sendButtonEl.addEventListener("click", function(){
+    
+let contatore = 0
+let numeriTrovati = []
 
+    for(let i = 0; i < 5; i++){
+
+        if(randomNumbers.includes(parseInt(inputArray[i].value))) {
+            numeriTrovati.push(parseInt(inputArray[i].value))
+            contatore++
+            console.log("bravo ragazzo")
+        
+
+    }
+
+
+    if(contatore == randomNumbers.length){
+
+        resultEl.innerText = "Bravo ragazzo li hai trovati tutti !"
+
+    } else {
+
+        resultEl.innerText = `punteggio : ${contatore} 
+                        numeri trovati : ${numeriTrovati}`
+    }
+
+}
+});
 
 
 
@@ -103,11 +138,22 @@ function generateRandoms (){
 function countDown (){
 
     timerContainerEl.innerText = secondsLeft
-    
+   
     if(secondsLeft == 0){
+      
         clearInterval(timer)
         timerContainerEl.innerText = " "
         randomContainerEl.innerText = " "
+        sendButtonEl.style.display = "block"
+
+        for(let i = 0;i < 5;i++){
+            inputEl = document.createElement("input")
+            inputArray.push(inputEl)
+            inputContainerEl.append(inputEl)
+        }
+        console.log(inputArray)
+        
+
         
     }
     
