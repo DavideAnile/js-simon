@@ -36,15 +36,24 @@ const inputArray = []
 let randomNumbers ;
 let inputEl;
 let timer;
-let secondsLeft = 10
+let secondsLeft;
 
 playButtonEl.addEventListener("click", function(){
 
+
+// reset al click    
+    clearInterval(timer)
+    secondsLeft = 10
+    inputContainerEl.innerText = " "
+    sendButtonEl.style.display = "none"
+    resultEl.innerText = " "
+
+// genero numeri random
     generateRandoms()
 
-    randomContainerEl.append(randomNumbers)
+    randomContainerEl.innerText =  ` Ricorda questi numeri ! :  ${randomNumbers}  `
 
-
+// setto un timer di 10 secondi
     timer = setInterval(countDown, 1000)
 
 
@@ -144,7 +153,9 @@ function countDown (){
         clearInterval(timer)
         timerContainerEl.innerText = " "
         randomContainerEl.innerText = " "
+        playButtonEl.innerText = " RIGENERA NUMERI"
         sendButtonEl.style.display = "block"
+
 
         for(let i = 0;i < 5;i++){
             inputEl = document.createElement("input")
