@@ -17,10 +17,20 @@ e quali dei numeri da indovinare sono stati individuati.
 
 /* 
 -aggiungo evento al click del bottone
+-reset dei valori già esistenti
 -visualizza in pagina 5 numeri random
 -fai partire un timer di 10 secondi
--dopo i 10 secondi i numeri stampati in pagina scompaiono
+-dopo i 10 secondi i numeri stampati in pagina scompaiono (funzione "countDown")
+-genero evento al click del bottone "CONTROLLA NUMERI"
+-inizializzo contatore per punteggio finale
+-inizializzo un array per memorizzare i numeri "GIUSTI" inseriti dall'utente
 -fai inserire tramite 5 input diversi i numeri visti in precedenza 
+? SE il valorer dell'input corrispondente a [i] è incluso nell'array di numeri generati
+    °pusha il valore dentro l'array "numeriTrovati"
+?SE il valore di contatore è uguale al numero di numeri generati
+    °stampo in pagina "complimenti li hai trovati tutti"
+:ALTRIMENTI
+    °stampo in pagina quanti e quali numeri ho trovato
 
 
 */
@@ -38,17 +48,19 @@ let inputEl;
 let timer;
 let secondsLeft;
 
+
+// aggiungo evento al click del bottone
 playButtonEl.addEventListener("click", function(){
 
 
-// reset al click    
+// reset dei valori già esistenti al click    
     clearInterval(timer)
     secondsLeft = 10
     inputContainerEl.innerText = " "
     sendButtonEl.style.display = "none"
     resultEl.innerText = " "
 
-// genero numeri random
+// -visualizza in pagina 5 numeri random
     generateRandoms()
 
     randomContainerEl.innerText =  ` Ricorda questi numeri ! :  ${randomNumbers}  `
@@ -61,15 +73,24 @@ playButtonEl.addEventListener("click", function(){
     
 })
     
-
+// genero evento al click del bottone "CONTROLLA NUMERI"
 sendButtonEl.addEventListener("click", function(){
-    
+  
+//inizializzo contatore per punteggio finale    
 let contatore = 0
+
+// inizializzo un array per memorizzare i numeri "GIUSTI" inseriti dall'utente
 let numeriTrovati = []
 
+
+//-fai inserire tramite 5 input diversi i numeri visti in precedenza 
     for(let i = 0; i < 5; i++){
 
+
+// ? SE il valorer dell'input corrispondente a [i] è incluso nell'array di numeri generati
         if(randomNumbers.includes(parseInt(inputArray[i].value))) {
+
+        // °pusha il valore dentro l'array "numeriTrovati"    
             numeriTrovati.push(parseInt(inputArray[i].value))
             contatore++
             console.log("bravo ragazzo")
@@ -77,15 +98,18 @@ let numeriTrovati = []
 
     }
 
-
+// ? SE il valore di contatore è uguale al numero di numeri generati
     if(contatore == randomNumbers.length){
 
+        //° stampo in pagina questo
         resultEl.innerText = "Bravo ragazzo li hai trovati tutti !"
 
+//: ALTRIMENTI        
     } else {
 
-        resultEl.innerText = `punteggio : ${contatore} 
-                        numeri trovati : ${numeriTrovati}`
+        //°stampo in pagina questo
+        resultEl.innerText = `Punteggio : ${contatore} 
+                        Numeri trovati : ${numeriTrovati}`
     }
 
 }
@@ -148,10 +172,13 @@ function countDown (){
 
     timerContainerEl.innerText = secondsLeft
    
+
     if(secondsLeft == 0){
       
         clearInterval(timer)
         timerContainerEl.innerText = " "
+     
+// -dopo i 10 secondi i numeri stampati in pagina scompaiono        
         randomContainerEl.innerText = " "
         playButtonEl.innerText = " RIGENERA NUMERI"
         sendButtonEl.style.display = "block"

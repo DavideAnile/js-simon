@@ -22,6 +22,7 @@ button{
     border: 1px solid lightgray;
     border-radius: 10px;
     font-weight: bold;
+    cursor: pointer;
 }
 
 
@@ -44,8 +45,11 @@ button{
 }
 
 .first-container #random-container{
-    color: red;
+    color: blue;
     font-size: 1.5em;
+    font-weight: bold;
+    text-transform: uppercase;
+    
 }
 
 .first-container #timer{
@@ -89,7 +93,7 @@ button{
 .second-container #result{
     font-size: 2em;
     color: green;
-    text-transform: uppercase;
+    
     margin: 30px 0;
     
 }
